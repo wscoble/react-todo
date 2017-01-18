@@ -5,17 +5,28 @@
   "main": "index.js",
   "repository": "https://github.com/wscoble/react-todo",
   "scripts": {
-    "compile": "babel --presets es2015,stage-0 -d lib/ src/",
+    "compile": "babel --presets es2015,react -d lib/ src/",
     "test": "npm run compile && mocha --compilers js:babel-core/register"
   },
-  "author": "",
+  "author": "Scott Scoble <scott@scoble.tech>",
   "license": "ISC",
   "dependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "chai": "^3.5.0",
+    "eslint": "^3.13.1",
+    "eslint-config-defaults": "^9.0.0",
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-chai-expect": "^1.1.1",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-mocha": "^4.8.0",
+    "eslint-plugin-node": "^3.0.5",
+    "eslint-plugin-react": "^6.9.0",
+    "gulp": "^3.9.1",
     "mocha": "^3.2.0"
   }
 }

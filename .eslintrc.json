@@ -1,0 +1,12 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "plugins": ["react", "chai-expect", "mocha", "babel", "json", "node"],
+  "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    }
+}
