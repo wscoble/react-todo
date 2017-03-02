@@ -6,6 +6,12 @@ injectTapEventPlugin();
 
 class Item extends Component {
   render() {
+    let actions = this.props.isComplete ? '' : (
+      <CardActions>
+        <FlatButton label="Complete" onClick={this.props.onComplete} />
+        <FlatButton label="Edit" />
+      </CardActions>
+    )
     return (
       <Card className="Card">
         <CardHeader
@@ -14,10 +20,7 @@ class Item extends Component {
           actAsExpander={true}
           showExpandableButton={true}
         />
-        <CardActions>
-          <FlatButton label="Complete" onClick={this.props.onComplete} />
-          <FlatButton label="Edit" />
-        </CardActions>
+      {actions}
         <CardText expandable={true}>{this.props.children}</CardText>
       </Card>
     )

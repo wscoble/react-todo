@@ -12,7 +12,7 @@ class App extends Component {
     console.log(index, task)
     this.setState((prevState, props) => ({
       done: prevState.done.concat(task),
-      todo: prevState.todo.splice(index, 1)
+      todo: prevState.todo.filter((e, i) => i !== index)
     }))
   }
 
@@ -22,7 +22,7 @@ class App extends Component {
     })
 
     let dones = this.state.done.map((task, i) => {
-      return <Item key={i} showComplete={false} title={task.title} subtitle={task.subtitle}>{task.content}</Item>
+      return <Item key={i} isComplete={true} title={task.title} subtitle={task.subtitle}>{task.content}</Item>
     })
 
     return (
