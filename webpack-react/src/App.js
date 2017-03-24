@@ -24,11 +24,11 @@ class App extends Component {
 
   render() {
     let todos = this.state.todo.map((task, i) => {
-      return <Item key={i} onModify={() => this.modifyTodoTask(task, i)} onComplete={() => this.completeTodoTask(task, i)} title={task.title} subtitle={task.subtitle}>{task.content}</Item>
+      return <Item key={i} onModify={() => this.modifyTodoTask(task, i)} onComplete={() => this.completeTodoTask(task, i)} title={task.title} subtitle={task.subtitle} isEditable={task.isEditable}>{task.content}</Item>
     })
 
     let dones = this.state.done.map((task, i) => {
-      return <Item key={i} isComplete={true} title={task.title} subtitle={task.subtitle}>{task.content}</Item>
+      return <Item key={i} isComplete={true} title={task.title} subtitle={task.subtitle} isEditable={task.isEditable}>{task.content}</Item>
     })
 
     return (
