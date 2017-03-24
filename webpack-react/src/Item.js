@@ -5,7 +5,7 @@ import FlatButton from 'material-ui/FlatButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-class EditableItem extends Component {
+class Item extends Component {
   render() {
     let modifyButton = this.props.isEditable ? (
       <FlatButton label="Save" onClick={this.props.onModify} />
@@ -39,7 +39,7 @@ class EditableItem extends Component {
           showExpandableButton={true}
         />
       {actions}
-        <CardText expandable={true}>{this.props.children}</CardText>
+        <CardText expandable={true}>{cardText}</CardText>
       </Card>
     )
   }

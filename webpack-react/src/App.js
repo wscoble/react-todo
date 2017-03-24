@@ -17,8 +17,11 @@ class App extends Component {
   }
 
   modifyTodoTask(task, index) {
+    let newTodo = this.state.todo;
+    newTodo[index].isEditable = !newTodo[index].isEditable;
     this.setState((prevState, props) => ({
-      todo[props.index].isEditable: !prevState[props.index].isEditable
+      done: prevState.done,
+      todo: newTodo
     }))
   }
 
