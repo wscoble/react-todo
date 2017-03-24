@@ -16,9 +16,15 @@ class App extends Component {
     }))
   }
 
+  modifyTodoTask(task, index) {
+    this.setState((prevState, props) => ({
+      todo[props.index].isEditable: !prevState[props.index].isEditable
+    }))
+  }
+
   render() {
     let todos = this.state.todo.map((task, i) => {
-      return <Item key={i} onComplete={() => this.completeTodoTask(task, i)} title={task.title} subtitle={task.subtitle}>{task.content}</Item>
+      return <Item key={i} onModify={() => this.modifyTodoTask(task, i)} onComplete={() => this.completeTodoTask(task, i)} title={task.title} subtitle={task.subtitle}>{task.content}</Item>
     })
 
     let dones = this.state.done.map((task, i) => {
