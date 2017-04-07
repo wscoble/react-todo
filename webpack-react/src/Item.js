@@ -6,40 +6,93 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 class Item extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isExpanded: false,
+      isEditing: false,
+      title: this.props.title,
+      subtitle: this.props.subtitle,
+      content: this.props.children
+    }
+  }
+
+  onEdit() {
+    this.setState({isExpanded: true, isEditing: true})
+  }
+
+  onSave() {
+    this.setState({isEditing: false})
+    this.props.onModify({
+      title: this.state.title,
+      subtitle: this.state.subtitle,
+      content: this.state.content
+    })
+  }
+
+  onCancel() {
+    this.setState({isEditing: false})
+  }
+
   render() {
-    let modifyButton = this.props.isEditable ? (
-      <FlatButton label="Save" onClick={this.props.onModify} />
-    ) : (
-      <FlatButton label="Edit" onClick={this.props.onModify} />
+    let modifyButton = ''
+    if (this.props.isEditable) {
+      modifyButton = this.state.isEditing ? ([
+        <FlatButton key={0} label="Save" onClick={() => this.onSave()} />,
+        <FlatButton key={1} label="Cancel" onClick={() => this.onCancel()} />
+      ]) : (
+        <FlatButton label="Edit" onClick={() => this.onEdit()} />
+      )
+    }
+
+    let completeButton = this.state.isEditing ? '' : (
+      <FlatButton label="Complete" onClick={this.props.onComplete} />
     )
 
     let actions = this.props.isComplete ? '' : (
       <CardActions>
-        <FlatButton label="Complete" onClick={this.props.onComplete} />
+        {completeButton}
         {modifyButton}
       </CardActions>
     )
 
-    let cardText = this.props.isEditable ? (
+    let cardText = this.state.isEditing ? (
       <div>
-      <TextField hintText={this.props.title} />
-      <TextField hintText={this.props.subtitle} />
-      <TextField hintText={this.props.children} />
+        <TextField 
+          name={'Title'}
+          value={this.state.title} 
+          onChange={(e, v) => this.setState({title: v})}
+          fullWidth={true} />
+          
+        <TextField 
+          name={'Subtitle'}
+          value={this.state.subtitle} 
+          onChange={(e, v) => this.setState({subtitle: v})}
+          fullWidth={true} />
+
+        <TextField 
+          name={'Content'}
+          value={this.state.content} 
+          onChange={(e, v) => this.setState({content: v})}
+          fullWidth={true} />
       </div>
     ) : (
       <div>{this.props.children}</div>
     )
 
     return (
-      <Card className="Card">
-        <CardHeader
-          title={this.props.title}
-          subtitle={this.props.subtitle}
-          actAsExpander={true}
-          showExpandableButton={true}
-        />
-      {actions}
-        <CardText expandable={true}>{cardText}</CardText>
+      <Card 
+        className="Card" 
+        expanded={this.state.isExpanded}
+        onExpandChange={s => this.setState({isExpanded: s})}>
+          <CardHeader
+            title={this.props.title}
+            subtitle={this.props.subtitle}
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          {actions}
+          <CardText expandable={true}>{cardText}</CardText>
       </Card>
     )
   }

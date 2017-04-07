@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 let lists = {
   todo: [
     {
-      isEditable: false,
+      isEditable: true,
       title: "Item 1",
       subtitle: "the first item",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
@@ -16,7 +16,7 @@ let lists = {
                "Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio."
     },
     {
-      isEditable: false,
+      isEditable: true,
       title: "Item 2",
       subtitle: "the second item",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
@@ -25,7 +25,7 @@ let lists = {
                "Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio."
     },
     {
-      isEditable: false,
+      isEditable: true,
       title: "Item 3",
       subtitle: "the third item",
       content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +

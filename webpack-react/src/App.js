@@ -16,12 +16,19 @@ class App extends Component {
     }))
   }
 
-  modifyTodoTask(task, index) {
-    let newTodo = this.state.todo;
-    newTodo[index].isEditable = !newTodo[index].isEditable;
+  modifyTodoTask(index, newTask) {
+    let _todo = this.state.todo
+    let newTodo = _todo[index]
+    newTodo.title = newTask.title
+    newTodo.subtitle = newTask.subtitle
+    newTodo.content = newTask.content
+
+    _todo[index] = newTodo
+
+    // newTodo[index].isEditable = !newTodo[index].isEditable;
     this.setState((prevState, props) => ({
       done: prevState.done,
-      todo: newTodo
+      todo: _todo
     }))
   }
 
@@ -29,9 +36,9 @@ class App extends Component {
     let todos = this.state.todo.map((task, i) => {
       return (
         <Item 
-          key={i} 
-          onModify={() => this.modifyTodoTask(task, i)} 
-          onComplete={() => this.completeTodoTask(task, i)} 
+          key={task.title} 
+          onModify={(v) => this.modifyTodoTask(i, v)} 
+          onComplete={(v) => this.completeTodoTask(task, i, v)} 
           title={task.title} 
           subtitle={task.subtitle} 
           isEditable={task.isEditable}>
@@ -43,7 +50,7 @@ class App extends Component {
     let dones = this.state.done.map((task, i) => {
       return (
       <Item 
-        key={i} 
+        key={task.title} 
         isComplete={true} 
         title={task.title} 
         subtitle={task.subtitle} 
