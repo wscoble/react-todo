@@ -3,7 +3,16 @@ import TextField from 'material-ui/TextField';
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import IconButton from 'material-ui/IconButton';
+import Delete from 'material-ui/svg-icons/action/delete';
 injectTapEventPlugin();
+
+const iconStyles = {
+  mediumIcon: {
+    width: 48,
+    height: 48,
+  }
+};
 
 class Item extends Component {
   constructor(props) {
@@ -53,26 +62,27 @@ class Item extends Component {
       <CardActions>
         {completeButton}
         {modifyButton}
+        <IconButton style={iconStyles} onClick={this.props.onDelete}><Delete /></IconButton>
       </CardActions>
     )
 
     let cardText = this.state.isEditing ? (
       <div>
-        <TextField 
+        <TextField
           name={'Title'}
-          value={this.state.title} 
+          value={this.state.title}
           onChange={(e, v) => this.setState({title: v})}
           fullWidth={true} />
-          
-        <TextField 
+
+        <TextField
           name={'Subtitle'}
-          value={this.state.subtitle} 
+          value={this.state.subtitle}
           onChange={(e, v) => this.setState({subtitle: v})}
           fullWidth={true} />
 
-        <TextField 
+        <TextField
           name={'Content'}
-          value={this.state.content} 
+          value={this.state.content}
           onChange={(e, v) => this.setState({content: v})}
           fullWidth={true} />
       </div>
@@ -81,8 +91,8 @@ class Item extends Component {
     )
 
     return (
-      <Card 
-        className="Card" 
+      <Card
+        className="Card"
         expanded={this.state.isExpanded}
         onExpandChange={s => this.setState({isExpanded: s})}>
           <CardHeader

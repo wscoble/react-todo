@@ -8,8 +8,16 @@ class App extends Component {
     this.state = { done: props.lists.done, todo: props.lists.todo }
   }
 
+  deleteTodoTask(index) {
+    let _newTodo = this.state.todo.slice()
+    _newTodo.splice(index, 1)
+    this.setState((prevState, props) =>({
+      done: prevState.done,
+      todo: _newTodo
+    }))
+  }
+
   completeTodoTask(task, index) {
-    console.log(index, task)
     this.setState((prevState, props) => ({
       done: prevState.done.concat(task),
       todo: prevState.todo.filter((e, i) => i !== index)
@@ -35,12 +43,13 @@ class App extends Component {
   render() {
     let todos = this.state.todo.map((task, i) => {
       return (
-        <Item 
-          key={task.title} 
-          onModify={(v) => this.modifyTodoTask(i, v)} 
-          onComplete={(v) => this.completeTodoTask(task, i, v)} 
-          title={task.title} 
-          subtitle={task.subtitle} 
+        <Item
+          key={task.title}
+          onModify={(v) => this.modifyTodoTask(i, v)}
+          onComplete={(v) => this.completeTodoTask(task, i, v)}
+          onDelete={(v) => this.deleteTodoTask(i)}
+          title={task.title}
+          subtitle={task.subtitle}
           isEditable={task.isEditable}>
             {task.content}
         </Item>
@@ -49,11 +58,11 @@ class App extends Component {
 
     let dones = this.state.done.map((task, i) => {
       return (
-      <Item 
-        key={task.title} 
-        isComplete={true} 
-        title={task.title} 
-        subtitle={task.subtitle} 
+      <Item
+        key={task.title}
+        isComplete={true}
+        title={task.title}
+        subtitle={task.subtitle}
         isEditable={task.isEditable}>
           {task.content}
       </Item>
